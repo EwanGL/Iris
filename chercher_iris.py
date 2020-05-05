@@ -8,6 +8,8 @@ import math
 
 InputPL = float(input("Quel est la longueur des pétals de votre iris?"))
 InputPW = float(input("Quel est la largeur des pétals de votre iris?"))
+InputSL = float(input("Quel est la longueur des sépals de votre iris?"))
+InputSW = float(input("Quel est la largeur des sépals de votre iris?"))
 InputK = int(input("Combien de proches voisins voulez-vous prendre en compte?"))
 
 # recupération des données dans le fichier iris.csv
@@ -29,22 +31,22 @@ def lireFichierCSV(nomFichier):
 iris = lireFichierCSV("iris.csv")
 
 # Algorithme k plus proche voisins
-def distanceMath(xA,yA,xB,yB):
+def distanceMath(xA,yA,xB,yB,zB,zA,tA,tB):
     '''
     Cette fonction renvoie la distance séparant les points A(xA,yA) et B(xB,yB)
     '''
-    return math.sqrt(math.pow(xB-xA,2)+math.pow(yB-yA,2))
+    return math.sqrt(math.pow(xB-xA,2)+math.pow(yB-yA,2)+math.pow(zB-zA,2)+math.pow(tB-tA,2))
 
-assert(distanceMath(3,0,0,4)==5.0)
+"""assert(distanceMath(3,0,0,4)==5.0)
 assert(distanceMath(3,0,6,0)==3.0)
-assert(distanceMath(0,0,2,1)==2.23606797749979)
+assert(distanceMath(0,0,2,1)==2.23606797749979)"""
 
 def distance(fleur1,fleur2):
     '''
     Cette fonction renvoie la distance entre deux fleurs
     en considérant la longueur et la larguer des pétales
     '''
-    return distanceMath(float(fleur1['PetalLength']),float(fleur1['PetalWidth']),float(fleur2['PetalLength']),float(fleur2['PetalWidth']))
+    return distanceMath(float(fleur1['PetalLength']),float(fleur1['PetalWidth']),float(fleur2['PetalLength']),float(fleur2['PetalWidth']),float(fleur1['SepalLength']),float(fleur1['SepalWidth']),float(fleur2['SepalLength']),float(fleur2['SepalWidth']))
 
 
 def chercher_mini(uneFleur,indice_depart):
@@ -79,7 +81,7 @@ def chercherPlusProches(uneFleur, k):
         a_classer = a_classer + 1
     return  iris[0:k]
 
-monIris ={'PetalLength':InputPL,'PetalWidth':InputPW}
+monIris ={'PetalLength':InputPL,'PetalWidth':InputPW, 'SepalLength':InputSL, 'SepalWidth':InputSW}
 lesPLusProches = chercherPlusProches(monIris ,InputK)
 
 Iris_setosa = 0
