@@ -6,6 +6,10 @@ import csv
 import sys
 import math
 
+InputPL = float(input("Quel est la longueur des pétals de votre iris?"))
+InputPW = float(input("Quel est la largeur des pétals de votre iris?"))
+InputK = int(input("Combien de proches voisins voulez-vous prendre en compte?"))
+
 # recupération des données dans le fichier iris.csv
 def lireFichierCSV(nomFichier):
     '''
@@ -75,9 +79,31 @@ def chercherPlusProches(uneFleur, k):
         a_classer = a_classer + 1
     return  iris[0:k]
 
-monIris ={'PetalLength':5.0,'PetalWidth':1.7}
-lesPLusProches = chercherPlusProches(monIris ,5)
-for fleur in lesPLusProches:
-    print(fleur['Name'])
+monIris ={'PetalLength':InputPL,'PetalWidth':InputPW}
+lesPLusProches = chercherPlusProches(monIris ,InputK)
 
+Iris_setosa = 0
+Iris_versicolor = 0
+Iris_virginica = 0
+
+for fleur in lesPLusProches:
+    if fleur['Name'] == 'Iris-setosa':
+        Iris_setosa += 1
+    elif fleur['Name'] == 'Iris-versicolor':
+        Iris_versicolor += 1
+    elif fleur['Name'] == 'Iris-virginica':
+        Iris_virginica += 1
+
+Voisins = {"Iris-setosa":Iris_setosa, "Iris-versicolor":Iris_versicolor,"Iris-virginica":Iris_virginica}
+
+def Types(Voisins):
+    nbr_maxi = 0
+    cle_maxi = ''
+    for cle,valeur in Voisins.items():
+        if valeur > nbr_maxi:
+            nbr_maxi = valeur
+            cle_maxi = cle
+    return cle_maxi
+
+print (f"Le type de votre iris est: {Types(Voisins)}")
 sys.exit()

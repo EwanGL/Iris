@@ -28,11 +28,18 @@ def creerGraphique():
     for fleur in iris :
         abscisse = float(fleur['PetalLength'])
         ordonnee = float(fleur['PetalWidth'])
-        couleur = 'blue'
+        
+        if fleur['Name'] == 'Iris-setosa':
+            couleur = 'blue'
+        elif fleur['Name'] == 'Iris-versicolor':
+            couleur = 'yellow'
+        elif fleur['Name'] == 'Iris-virginica':
+            couleur ='lime'
         forme = '.'
         plt.plot(abscisse, ordonnee, marker = forme, color = couleur)
 
 creerGraphique()
+
 # Réglages du graphique
 plt.title("Pétales des iris")
 plt.xlabel('Longueur en cm')
