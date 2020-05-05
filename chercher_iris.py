@@ -1,5 +1,5 @@
-# Auteur P.Vincent
-# 28/04/2020
+# Auteur Ewan GRIGNOUX LEVERT
+# 05/05/2020
 # coding : utf-8
 import matplotlib.pyplot as plt
 import csv
@@ -11,6 +11,7 @@ InputPW = float(input("Quel est la largeur des pétals de votre iris?"))
 InputSL = float(input("Quel est la longueur des sépals de votre iris?"))
 InputSW = float(input("Quel est la largeur des sépals de votre iris?"))
 InputK = int(input("Combien de proches voisins voulez-vous prendre en compte?"))
+InputD = input("Quel méthode de calcul vous voulez utilisez, la distance Euclidienne ou la distance Manhattan? E/M")
 
 # recupération des données dans le fichier iris.csv
 def lireFichierCSV(nomFichier):
@@ -35,11 +36,12 @@ def distanceMath(xA,yA,xB,yB,zB,zA,tA,tB):
     '''
     Cette fonction renvoie la distance séparant les points A(xA,yA) et B(xB,yB)
     '''
-    return math.sqrt(math.pow(xB-xA,2)+math.pow(yB-yA,2)+math.pow(zB-zA,2)+math.pow(tB-tA,2))
-
-"""assert(distanceMath(3,0,0,4)==5.0)
-assert(distanceMath(3,0,6,0)==3.0)
-assert(distanceMath(0,0,2,1)==2.23606797749979)"""
+    if InputD == 'E':
+        return math.sqrt(math.pow(xB-xA,2)+math.pow(yB-yA,2)+math.pow(zB-zA,2)+math.pow(tB-tA,2))
+    elif InputD == 'M':
+        return math.sqrt(abs(xB-xA)+abs(yB-yA)+abs(zB-zA)+abs(tB-tA))
+    else:
+        print("Vous avez saisie une mauvaise lettre")
 
 def distance(fleur1,fleur2):
     '''
