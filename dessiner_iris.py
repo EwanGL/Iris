@@ -24,11 +24,10 @@ def lireFichierCSV(nomFichier):
 iris = lireFichierCSV("iris.csv")
 
 # Création du graphique
-def creerGraphique():
+def creerGraphique(X,Y):
     for fleur in iris :
         abscisse = float(fleur['PetalLength'])
         ordonnee = float(fleur['PetalWidth'])
-        
         if fleur['Name'] == 'Iris-setosa':
             couleur = 'blue'
         elif fleur['Name'] == 'Iris-versicolor':
@@ -37,14 +36,12 @@ def creerGraphique():
             couleur ='lime'
         forme = '.'
         plt.plot(abscisse, ordonnee, marker = forme, color = couleur)
+    plt.plot(X,Y, marker=forme, color='red')
 
-creerGraphique()
+    # Réglages du graphique
+    plt.title("Pétales des iris")
+    plt.xlabel('Longueur en cm')
+    plt.ylabel('Largeur en cm')
 
-# Réglages du graphique
-plt.title("Pétales des iris")
-plt.xlabel('Longueur en cm')
-plt.ylabel('Largeur en cm')
-
-# Affichage du graphique
-plt.show()
-sys.exit()
+    # Affichage du graphique
+    plt.show()

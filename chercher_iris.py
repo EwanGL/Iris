@@ -8,6 +8,7 @@ import math
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+from dessiner_iris import creerGraphique
 
 root = Tk()
 root.title('Iris')
@@ -46,8 +47,9 @@ D_nbr = ttk.Combobox(root, value=calculs, width=10)
 D_nbr.current(1)
 D_nbr.grid(row=5, column=1, padx=5, pady=5)
 
+img=''
 
-def Start():
+def Depart():
     global img
     InputPL = float(PL_nbr.get())
     InputPW = float(PW_nbr.get())
@@ -174,7 +176,17 @@ def Start():
     image = Label(root, image=img)
     image.grid(row=7, column=1, padx=5, pady=5)
 
-start = Button(root, text='Chercher', command=Start)
+    def graphique():
+        X = InputPL
+        print(X)
+        Y = InputPW
+        print(Y)
+        creerGraphique(X, Y)
+    
+    graphe = Button(root, text='Graphique', command=graphique)
+    graphe.grid(row=7, column=0, padx=5, pady=5)
+
+start = Button(root, text='Chercher', command=Depart)
 start.grid(row=6, column=0, padx=5, pady=5)
 
 root.mainloop()
